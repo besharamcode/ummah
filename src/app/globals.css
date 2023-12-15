@@ -3,25 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primery-clr: #dde6ed;
+  --sec-clr: #19283C;
+  --anc-clr: #192638;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --primery-clr: #192638;
+    --sec-clr: #19283C;
+    --anc-clr: #dde6ed;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--anc-clr);
   }
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--anc-clr);
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: rgb(var(--anc-clr));
+  background: var(--primery-clr);
 }
