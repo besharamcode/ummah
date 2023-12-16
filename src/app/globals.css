@@ -1,17 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --primery-clr: #dde6ed;
-  --sec-clr: #19283C;
+  --sec-clr: #19283c;
   --anc-clr: #192638;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --primery-clr: #192638;
-    --sec-clr: #19283C;
+    --sec-clr: #19283c;
     --anc-clr: #dde6ed;
   }
 
@@ -21,9 +22,29 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  input,
+  button {
     color: var(--anc-clr);
+    letter-spacing: 0.03ch;
   }
+
+  button {
+    background: var(--anc-clr);
+    color: var(--primery-clr);
+    transition: all 0.1s ease-in-out;
+    width: fit-content;
+    margin: auto;
+  }
+
+  button:hover {
+    color: var(--anc-clr);
+    background: var(--primery-clr);
+  }
+}
+
+input {
+  font-size: 90%;
 }
 
 p,
@@ -32,8 +53,26 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+input,
+button {
   color: var(--anc-clr);
+}
+
+button {
+  color: var(--primery-clr);
+  transition: all 0.1s ease-in-out;
+  width: fit-content;
+  margin: auto;
+}
+
+button:hover {
+  color: var(--anc-clr);
+  background: var(--primery-clr);
+}
+
+::placeholder {
+  font-size: 80%;
 }
 
 body {
