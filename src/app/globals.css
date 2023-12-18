@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+} */
+
 :root {
   --primery-clr: #dde6ed;
   --sec-clr: #19283c;
@@ -35,6 +43,7 @@
     transition: all 0.1s ease-in-out;
     width: fit-content;
     margin: auto;
+    font-size: 90%;
   }
 
   button:hover {
@@ -44,7 +53,7 @@
 }
 
 input {
-  font-size: 90%;
+  font-size: 85%;
 }
 
 p,
@@ -64,6 +73,8 @@ button {
   transition: all 0.1s ease-in-out;
   width: fit-content;
   margin: auto;
+  font-size: 90%;
+  font-weight: 600;
 }
 
 button:hover {
