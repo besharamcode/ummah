@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import transLogo from "../assets/Ummah-white-trans-logo.svg";
 import check from "../assets/check-svg.svg";
@@ -17,13 +16,6 @@ export default function Home() {
   const [isEmailorMobile, setIsEmailorMobile] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  const isValidUsername = (username) => {
-    // eslint-disable-next-line no-useless-escape
-    const regex = /^[a-z0-9_\.]+$/;
-    const a = regex.test(username);
-    return a;
-  };
-
   const isValidEmailorMobile = (emailormobile) => {
     const regexForMobile = /^(0|91)?[6-9][0-9]{9}$/;
     const regexForEmail =
@@ -35,30 +27,36 @@ export default function Home() {
     if (!mobileTest && !emailTest) {
       return false;
     } else {
+      setIsEmailorMobile(true);
       return true;
     }
   };
 
-  const createUser = async () => {
+  const createUser = async (e) => {
+    e.p
+    console.log(e)
     if (isEmailorMobile && isName && isPassword && isUsername) {
       console.log("User created");
     }
   };
 
+  const checkUsername = async (username) => {
+    const find = await fetch(`/api/signup`, {
+      headers: {
+        "Content-type": "application/json",
+        method: "GET",
+      },
+    });
+
+    const response = await find.json();
+    console.log(response);
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (username) {
-        isValidUsername(username) ? setIsUsername(true) : setIsUsername(false);
-      } else if (name) {
-        name.length >= 5 ? setIsName(true) : setIsName(false);
-      } else if (password) {
-        password.length >= 8 ? setIsPassword(true) : setIsPassword(false);
-      } else if (emailormobile) {
-        isValidEmailorMobile(emailormobile)
-          ? setIsEmailorMobile(true)
-          : setIsEmailorMobile(false);
+      if (name) {
       }
-    }, 1000);
+    }, 2000);
 
     return () => {
       clearTimeout(timer);
@@ -95,6 +93,7 @@ export default function Home() {
             className="text-center  mx-auto mt-8"
             id="signup-form"
             name="signup-form"
+            onSubmit={(e) => createUser(e)}
           >
             <h2 className="font-semibold font-signika text-lg">
               Create Account
@@ -169,7 +168,7 @@ export default function Home() {
                   name="signup-password-input"
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}
-                  type="text"
+                  type="password"
                   className="mx-2 my-2 py-2 px-3 bg-transparent border border-gray-600 outline-none rounded w-full"
                   placeholder="Password"
                 />
