@@ -33,7 +33,6 @@ export default function Home() {
   };
 
   const createUser = async (e) => {
-    e.p
     console.log(e)
     if (isEmailorMobile && isName && isPassword && isUsername) {
       console.log("User created");
