@@ -5,8 +5,10 @@ import check from "../assets/check-svg.svg";
 import cross from "../assets/cross-svg.svg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
   const [emailormobile, setemailormobile] = useState("");
@@ -16,60 +18,121 @@ export default function Home() {
   const [isEmailorMobile, setIsEmailorMobile] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  const isValidEmailorMobile = (emailormobile) => {
-    const regexForMobile = /^(0|91)?[6-9][0-9]{9}$/;
+  const checkUsername = async (username) => {
+    const find = await fetch(`/api/signup/${username}`, {
+      headers: {
+        "Content-type": "application/json",
+      },
+      method: "GET",
+    });
+    const response = await find.json();
+    if (response.isAvail) {
+      return response.isAvail;
+    } else {
+      alert(response.error);
+    }
+  };
+
+  const checkEmail = async (email) => {
+    const find = await fetch(`/api/signup/${email}`, {
+      headers: {
+        "Content-type": "application/json",
+      },
+      method: "GET",
+    });
+    const response = await find.json();
+    if (response.isAvail) {
+      return response.isAvail;
+    } else {
+      alert(response.error);
+    }
+  };
+
+  const isValidUsername = async (username) => {
+    // eslint-disable-next-line no-useless-escape
+    const regex = /^[a-z0-9_\.]+$/;
+    const a = regex.test(username);
+    if (a) {
+      const isAvail = await checkUsername(username);
+      isAvail ? setIsUsername(true) : setIsUsername(false);
+    } else {
+      setIsUsername(false);
+    }
+  };
+
+  const isValidEmailorMobile = async (emailormobile) => {
+    // const regexForMobile = /^(0|91)?[6-9][0-9]{9}$/;
+    // const mobileTest = regexForMobile.test(emailormobile);
+
     const regexForEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    const mobileTest = regexForMobile.test(emailormobile);
     const emailTest = regexForEmail.test(emailormobile);
-    console.log(mobileTest, emailTest);
-    if (!mobileTest && !emailTest) {
-      return false;
-    } else {
+    if (emailTest) {
+      const isAvail = await checkEmail(emailormobile);
       setIsEmailorMobile(true);
-      return true;
+    } else {
+      setIsEmailorMobile(false);
+    }
+  };
+
+  const isValidName = (name) => {
+    return name.length > 5 ? setIsName(true) : setIsName(false);
+  };
+  const isValidPassword = (password) => {
+    return password.length > 8 ? setIsPassword(true) : setIsPassword(false);
+  };
+
+  const debounce = (func, timeout) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  };
+
+  const getDebouncedGetName = debounce(isValidName, 1000);
+  const getDebouncedGetUsername = debounce(isValidUsername, 2000);
+  const getDebouncedGetEmailorMobile = debounce(isValidEmailorMobile, 1000);
+  const getDebouncedGetPassword = debounce(isValidPassword, 1000);
+
+  const handleInput = (value, from) => {
+    if (from === "Name") {
+      getDebouncedGetName(value);
+      setname(value);
+    } else if (from === "Username") {
+      getDebouncedGetUsername(value);
+      setusername(value);
+    } else if (from === "Emailormobile") {
+      setemailormobile(value);
+      getDebouncedGetEmailorMobile(value);
+    } else if (from === "Password") {
+      setpassword(value);
+      getDebouncedGetPassword(value);
     }
   };
 
   const createUser = async (e) => {
-    console.log(e)
+    e.preventDefault();
     if (isEmailorMobile && isName && isPassword && isUsername) {
-      console.log("User created");
+      const create = await fetch(`api/signup`, {
+        headers: {
+          "Content-type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ name, username, emailormobile, password }),
+      });
+
+      const response = await create.json();
+      if(response.message){
+        router.push("/verify-user")
+      }else{
+        alert(response.error)
+      }
     }
   };
-
-  const checkUsername = async (username) => {
-    const find = await fetch(`/api/signup`, {
-      headers: {
-        "Content-type": "application/json",
-        method: "GET",
-      },
-    });
-
-    const response = await find.json();
-    console.log(response);
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (name) {
-      }
-    }, 2000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [
-    name,
-    username,
-    emailormobile,
-    password,
-    isEmailorMobile,
-    isName,
-    isPassword,
-    isUsername,
-  ]);
 
   return (
     <>
@@ -104,7 +167,7 @@ export default function Home() {
                   name="signup-name-input"
                   value={name}
                   type="text"
-                  onChange={(e) => setname(e.target.value)}
+                  onChange={(e) => handleInput(e.target.value, "Name")}
                   className="mx-2 my-2 py-2 px-3 bg-transparent border border-gray-600 outline-none rounded w-full"
                   placeholder="Full Name"
                 />
@@ -124,7 +187,9 @@ export default function Home() {
                   id="signup-username-input"
                   name="signup-username-input"
                   value={username}
-                  onChange={(e) => setusername(e.target.value.toLowerCase())}
+                  onChange={(e) =>
+                    handleInput(e.target.value.toLowerCase(), "Username")
+                  }
                   type="text"
                   className="mx-2 my-2 py-2 px-3 bg-transparent border border-gray-600 outline-none rounded w-full"
                   placeholder="Username"
@@ -145,10 +210,10 @@ export default function Home() {
                   id="signup-emailormobile-input"
                   name="signup-emailormobile-input"
                   value={emailormobile}
-                  onChange={(e) => setemailormobile(e.target.value)}
+                  onChange={(e) => handleInput(e.target.value, "Emailormobile")}
                   type="text"
                   className=" mx-2 my-2 py-2 px-3 bg-transparent border border-gray-600 outline-none rounded w-full"
-                  placeholder="Mobile Number or email address"
+                  placeholder="Email address"
                 />
                 {emailormobile.length >= 10 ? (
                   <Image
@@ -166,7 +231,7 @@ export default function Home() {
                   id="signup-password-input"
                   name="signup-password-input"
                   value={password}
-                  onChange={(e) => setpassword(e.target.value)}
+                  onChange={(e) => handleInput(e.target.value, "Password")}
                   type="password"
                   className="mx-2 my-2 py-2 px-3 bg-transparent border border-gray-600 outline-none rounded w-full"
                   placeholder="Password"
@@ -190,7 +255,10 @@ export default function Home() {
                   Already have account?
                 </p>
               </Link>
-              <button className="px-4 py-2 rounded mt-5 hover:outline hover:text hover:outline-1 hover:outline-gray-100">
+              <button
+                type="submit"
+                className="px-4 py-2 rounded mt-5 hover:outline hover:text hover:outline-1 hover:outline-gray-100"
+              >
                 Bismillah
               </button>
             </div>

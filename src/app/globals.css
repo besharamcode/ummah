@@ -38,8 +38,8 @@
   }
 
   button {
-    background: var(--anc-clr);
-    color: var(--primery-clr);
+    background: var(--anc-clr) !important;
+    color: var(--primery-clr) !important;
     transition: all 0.1s ease-in-out;
     width: fit-content;
     margin: auto;
@@ -47,8 +47,8 @@
   }
 
   button:hover {
-    color: var(--anc-clr);
-    background: var(--primery-clr);
+    color: var(--anc-clr) !important;
+    background: var(--primery-clr) !important;
   }
 }
 
@@ -65,11 +65,11 @@ h5,
 h6,
 input,
 button {
-  color: var(--anc-clr);
+  color: var(--anc-clr) !important;
 }
 
 button {
-  color: var(--primery-clr);
+  color: var(--primery-clr) !important;
   transition: all 0.1s ease-in-out;
   width: fit-content;
   margin: auto;
@@ -78,8 +78,8 @@ button {
 }
 
 button:hover {
-  color: var(--anc-clr);
-  background: var(--primery-clr);
+  color: var(--anc-clr) !important;
+  background: var(--primery-clr) !important;
 }
 
 ::placeholder {
