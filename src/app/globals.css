@@ -42,13 +42,16 @@
     color: var(--primery-clr) !important;
     transition: all 0.1s ease-in-out;
     width: fit-content;
+    font-weight: 600;
     margin: auto;
     font-size: 90%;
+    padding: 0.7rem 5.5rem;
   }
 
   button:hover {
     color: var(--anc-clr) !important;
     background: var(--primery-clr) !important;
+    outline: 1px solid var(--anc-clr);
   }
 }
 
@@ -69,17 +72,20 @@ button {
 }
 
 button {
+  background: var(--anc-clr) !important;
   color: var(--primery-clr) !important;
   transition: all 0.1s ease-in-out;
   width: fit-content;
   margin: auto;
-  font-size: 90%;
   font-weight: 600;
+  font-size: 90%;
+  padding: 0.7rem 5.5rem;
 }
 
 button:hover {
   color: var(--anc-clr) !important;
   background: var(--primery-clr) !important;
+  outline: 1px solid var(--anc-clr);
 }
 
 ::placeholder {
@@ -89,4 +95,10 @@ button:hover {
 body {
   color: rgb(var(--anc-clr));
   background: var(--primery-clr);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

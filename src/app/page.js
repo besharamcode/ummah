@@ -1,14 +1,16 @@
 "use client";
+
 import Image from "next/image";
 import transLogo from "../assets/Ummah-white-trans-logo.svg";
 import check from "../assets/check-svg.svg";
 import cross from "../assets/cross-svg.svg";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./globals.css";
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
   const [emailormobile, setemailormobile] = useState("");
@@ -18,8 +20,8 @@ export default function Home() {
   const [isEmailorMobile, setIsEmailorMobile] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  const checkUsername = async (username) => {
-    const find = await fetch(`/api/signup/${username}`, {
+  const checkData = async (data) => {
+    const find = await fetch(`/api/auth/signup/${data}`, {
       headers: {
         "Content-type": "application/json",
       },
@@ -29,22 +31,7 @@ export default function Home() {
     if (response.isAvail) {
       return response.isAvail;
     } else {
-      alert(response.error);
-    }
-  };
-
-  const checkEmail = async (email) => {
-    const find = await fetch(`/api/signup/${email}`, {
-      headers: {
-        "Content-type": "application/json",
-      },
-      method: "GET",
-    });
-    const response = await find.json();
-    if (response.isAvail) {
-      return response.isAvail;
-    } else {
-      alert(response.error);
+      console.log(response.error);
     }
   };
 
@@ -53,7 +40,7 @@ export default function Home() {
     const regex = /^[a-z0-9_\.]+$/;
     const a = regex.test(username);
     if (a) {
-      const isAvail = await checkUsername(username);
+      const isAvail = await checkData(username);
       isAvail ? setIsUsername(true) : setIsUsername(false);
     } else {
       setIsUsername(false);
@@ -69,8 +56,8 @@ export default function Home() {
 
     const emailTest = regexForEmail.test(emailormobile);
     if (emailTest) {
-      const isAvail = await checkEmail(emailormobile);
-      setIsEmailorMobile(true);
+      const isAvail = await checkData(emailormobile);
+      isAvail ? setIsEmailorMobile(true) : setIsEmailorMobile(false);
     } else {
       setIsEmailorMobile(false);
     }
@@ -93,10 +80,10 @@ export default function Home() {
     };
   };
 
-  const getDebouncedGetName = debounce(isValidName, 1000);
+  const getDebouncedGetName = debounce(isValidName, 2000);
   const getDebouncedGetUsername = debounce(isValidUsername, 2000);
-  const getDebouncedGetEmailorMobile = debounce(isValidEmailorMobile, 1000);
-  const getDebouncedGetPassword = debounce(isValidPassword, 1000);
+  const getDebouncedGetEmailorMobile = debounce(isValidEmailorMobile, 2000);
+  const getDebouncedGetPassword = debounce(isValidPassword, 2000);
 
   const handleInput = (value, from) => {
     if (from === "Name") {
@@ -117,19 +104,18 @@ export default function Home() {
   const createUser = async (e) => {
     e.preventDefault();
     if (isEmailorMobile && isName && isPassword && isUsername) {
-      const create = await fetch(`api/signup`, {
+      const create = await fetch(`api/auth/signup`, {
         headers: {
           "Content-type": "application/json",
         },
         method: "POST",
         body: JSON.stringify({ name, username, emailormobile, password }),
       });
-
       const response = await create.json();
-      if(response.message){
-        router.push("/verify-user")
-      }else{
-        alert(response.error)
+      if (response.message) {
+        router.push(`/in/auth/verifyuser/${emailormobile}`);
+      } else {
+        alert(response.error);
       }
     }
   };
@@ -210,7 +196,9 @@ export default function Home() {
                   id="signup-emailormobile-input"
                   name="signup-emailormobile-input"
                   value={emailormobile}
-                  onChange={(e) => handleInput(e.target.value, "Emailormobile")}
+                  onChange={(e) =>
+                    handleInput(e.target.value.toLowerCase(), "Emailormobile")
+                  }
                   type="text"
                   className=" mx-2 my-2 py-2 px-3 bg-transparent border border-gray-600 outline-none rounded w-full"
                   placeholder="Email address"
@@ -247,27 +235,26 @@ export default function Home() {
                   ></Image>
                 ) : null}
               </div>
-              <Link href={"/forgot-password"} className="text-xs block">
-                <p className="text-right mx-2 font-signika">Forgot password?</p>
-              </Link>
-              <Link href={"/login"} className="text-xs block -mt-4">
-                <p className="text-left mx-2 font-signika">
+              <Link href={"/in/auth/signin"} className="text-xs block">
+                <p className="text-right mx-2 font-signika">
                   Already have account?
                 </p>
               </Link>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded mt-5 hover:outline hover:text hover:outline-1 hover:outline-gray-100"
-              >
+              <button type="submit" className="px-4 py-2 rounded mt-5">
                 Bismillah
               </button>
             </div>
           </form>
-          <div className="text-center font-medium  mt-8">
-            <p className="text-gray-400 text-xs font-signika">
+          <div className="text-center mt-8">
+            <p className="text-gray-400 text-xs font-light">
               By signup you confirm our <br />{" "}
-              <Link href={"/terms-of-uses"}>Terms of Use</Link> and{" "}
-              <Link href={"/privacy-policy"}>Privacy policy</Link>
+              <Link className="text-gray-500" href={"/in/legal/termsofuses"}>
+                Terms of Use
+              </Link>{" "}
+              and{" "}
+              <Link className="text-gray-500" href={"/in/legal/privacypolicy"}>
+                Privacy policy
+              </Link>
             </p>
           </div>
         </div>

@@ -34,6 +34,11 @@ const userSchema = new Schema({
   website: {
     type: String,
   },
+  isVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 export const userModel =

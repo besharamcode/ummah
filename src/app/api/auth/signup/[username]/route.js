@@ -4,20 +4,19 @@ import { userModel } from "@/models/users";
 import { userAgent } from "next/server";
 connect();
 
-export const GET = async (req) => {
+export const GET = async (req, { params }) => {
   try {
-    const { pathname } = new URL(req.url);
-    const data = pathname.split("/").pop();
+    const { username } = params;
     const regex = /^[a-z0-9_\.]+$/;
-    if (regex.test(data)) {
-      const findUser = await userModel.findOne({ username: data });
+    if (regex.test(username)) {
+      const findUser = await userModel.findOne({ username: username });
       if (!findUser) {
         return NextResponse.json({ message: "Ok", isAvail: true });
       } else {
         return NextResponse.json({ message: "Ok", isAvail: false });
       }
     } else {
-      const findUser = await userModel.findOne({ email: data });
+      const findUser = await userModel.findOne({ email: username });
       if (!findUser) {
         return NextResponse.json({ message: "Ok", isAvail: true });
       } else {

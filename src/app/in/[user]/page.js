@@ -1,4 +1,4 @@
-export default function verifyuser() {
+export default function User() {
   return (
     <>
       <p>Hello world</p>
