@@ -206,11 +206,11 @@ const sendOtp = (email, username, token) => {
                                 <tr>
                                   <td class="pad">
                                     <div class="alignment" align="center"><!--[if mso]>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:3000/in/auth/${username}/details?jwt=${token}" style="height:42px;width:164px;v-text-anchor:middle;" arcsize="10%" stroke="false">
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:3000/in/auth/${username}?jwt=${token}" style="height:42px;width:164px;v-text-anchor:middle;" arcsize="10%" stroke="false">
     <w:anchorlock/>
     <v:textbox inset="0px,0px,0px,0px">
     <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px">
-    <![endif]--><a href="http://localhost:3000/in/auth/${username}/details?jwt=${token}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#0c1c31;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Bismillah</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+    <![endif]--><a href="http://localhost:3000/in/auth/${username}?jwt=${token}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#0c1c31;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Bismillah</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
                                   </td>
                                 </tr>
                               </table>
@@ -297,9 +297,7 @@ export const POST = async (req) => {
         const payload = {
           userid: user._id,
         };
-        const token = jwt.sign(payload, process.env.JWT_UV_KEY, {
-          expiresIn: 60,
-        });
+        const token = jwt.sign(payload, process.env.JWT_UV_KEY);
         sendOtp(user.email, username, token);
         return res.json({ message: "User Created" });
         // return res;

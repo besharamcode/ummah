@@ -7,7 +7,7 @@ export async function middleware(req) {
     const cookieStore = cookies();
     const headerList = headers();
     // console.log(cookieStore,headerList)
-    if (req.nextUrl.pathname.startsWith("/api/auth/signup/verifyuser")) {
+    if (req.nextUrl.pathname.startsWith("/home")) {
       try {
         const token = "done"
         if (!token) {
@@ -18,7 +18,7 @@ export async function middleware(req) {
             { status: 401 }
           );
         } else {
-          const data = await jwt.verify(token, process.env.JWT_UV_KEY);
+          const data = jwt.verify(token, process.env.JWT_UV_KEY);
           console.log(data);
           req.user = data.userid;
           return NextResponse.next();

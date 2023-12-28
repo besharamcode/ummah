@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import transLogo from "../assets/Ummah-white-trans-logo.svg";
-import check from "../assets/check-svg.svg";
-import cross from "../assets/cross-svg.svg";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -158,14 +156,11 @@ export default function Home() {
                   placeholder="Full Name"
                 />
                 {name.length > 5 ? (
-                  <Image
-                    id="isName"
-                    className="absolute right-4 opacity-75 select-none"
-                    src={isName ? check : cross}
-                    alt="check"
-                    height={22}
-                    width={22}
-                  ></Image>
+                  <i
+                    className={`fa-solid ${
+                      isName ? "fa-circle-check" : "fa-circle-xmark"
+                    } absolute right-4 opacity-75 select-none text-xl`}
+                  ></i>
                 ) : null}
               </div>
               <div className="flex items-center relative">
@@ -181,14 +176,11 @@ export default function Home() {
                   placeholder="Username"
                 />
                 {username.length > 5 ? (
-                  <Image
-                    id="isUsername"
-                    className="absolute right-4 opacity-75 select-none"
-                    src={isUsername ? check : cross}
-                    alt="check"
-                    height={22}
-                    width={22}
-                  ></Image>
+                  <i
+                    className={`fa-solid ${
+                      isUsername ? "fa-circle-check" : "fa-circle-xmark"
+                    } absolute right-4 opacity-75 select-none text-xl`}
+                  ></i>
                 ) : null}
               </div>
               <div className="flex items-center relative">
@@ -204,14 +196,11 @@ export default function Home() {
                   placeholder="Email address"
                 />
                 {emailormobile.length >= 10 ? (
-                  <Image
-                    id="isEmailorMobile"
-                    className="absolute right-4 opacity-75 select-none"
-                    src={isEmailorMobile ? check : cross}
-                    alt="check"
-                    height={22}
-                    width={22}
-                  ></Image>
+                  <i
+                    className={`fa-solid ${
+                      isEmailorMobile ? "fa-circle-check" : "fa-circle-xmark"
+                    } absolute right-4 opacity-75 select-none text-xl`}
+                  ></i>
                 ) : null}
               </div>
               <div className="flex items-center relative">
@@ -225,14 +214,11 @@ export default function Home() {
                   placeholder="Password"
                 />
                 {password.length >= 8 ? (
-                  <Image
-                    id="isPassword"
-                    className="absolute right-4 opacity-75 select-none"
-                    src={isPassword ? check : cross}
-                    alt="check"
-                    height={22}
-                    width={22}
-                  ></Image>
+                  <i
+                    className={`fa-solid ${
+                      isPassword ? "fa-circle-check" : "fa-circle-xmark"
+                    } absolute right-4 opacity-75 select-none text-xl`}
+                  ></i>
                 ) : null}
               </div>
               <Link href={"/in/auth/signin"} className="text-xs block">
@@ -240,8 +226,8 @@ export default function Home() {
                   Already have account?
                 </p>
               </Link>
-              <button type="submit" className="px-4 py-2 rounded mt-5">
-                Bismillah
+              <button type="submit" className="px-4 py-2 rounded mt-5 ">
+                <i className="fa-solid fa-hand-point-up"></i> Bismillah
               </button>
             </div>
           </form>

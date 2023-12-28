@@ -19,6 +19,9 @@ module.exports = {
         signika: ["Signika", "cursive"],
         Rampart: ["Rampart One", "cursive"],
       },
+      spacing: {
+        0.5: "2px",
+      },
     },
   },
   plugins: [],

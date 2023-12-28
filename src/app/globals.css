@@ -1,16 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400;600;700&display=swap");
+@import url("@/assets/icons.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* @layer base {
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-} */
-
+/* 
 :root {
   --primery-clr: #dde6ed;
   --sec-clr: #19283c;
@@ -24,6 +18,10 @@
     --anc-clr: #dde6ed;
   }
 
+  i {
+    color: var(--anc-clr);
+  }
+
   p,
   h1,
   h2,
@@ -32,14 +30,17 @@
   h5,
   h6,
   input,
+  select,
   button {
     color: var(--anc-clr);
     letter-spacing: 0.03ch;
   }
 
+  option {
+    background: var(--primery-clr);
+  }
+
   button {
-    background: var(--anc-clr) !important;
-    color: var(--primery-clr) !important;
     transition: all 0.1s ease-in-out;
     width: fit-content;
     font-weight: 600;
@@ -48,15 +49,40 @@
     padding: 0.7rem 5.5rem;
   }
 
+  button {
+    background: var(--anc-clr) !important;
+  }
+
+  button i {
+    padding: 2px;
+  }
+
+  button:hover i {
+    color: var(--anc-clr) !important;
+  }
+
   button:hover {
     color: var(--anc-clr) !important;
     background: var(--primery-clr) !important;
     outline: 1px solid var(--anc-clr);
   }
+
+  a {
+    color: var(--anc-clr);
+  }
 }
 
-input {
+input,
+select {
   font-size: 85%;
+}
+
+i {
+  color: var(--anc-clr);
+}
+
+option {
+  background: var(--primery-clr);
 }
 
 p,
@@ -67,12 +93,12 @@ h4,
 h5,
 h6,
 input,
+select,
 button {
   color: var(--anc-clr) !important;
 }
 
 button {
-  background: var(--anc-clr) !important;
   color: var(--primery-clr) !important;
   transition: all 0.1s ease-in-out;
   width: fit-content;
@@ -80,6 +106,19 @@ button {
   font-weight: 600;
   font-size: 90%;
   padding: 0.7rem 5.5rem;
+}
+
+button,
+button i {
+  color: var(--anc-clr);
+}
+
+button:hover button i {
+  color: var(--anc-clr) !important;
+}
+
+button {
+  background: var(--anc-clr) !important;
 }
 
 button:hover {
@@ -90,6 +129,14 @@ button:hover {
 
 ::placeholder {
   font-size: 80%;
+} */
+
+/* Root for light theme */
+
+:root {
+  --primery-clr: #dde6ed;
+  --sec-clr: #19283c;
+  --anc-clr: #192638;
 }
 
 body {
@@ -97,8 +144,121 @@ body {
   background: var(--primery-clr);
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select,
+button {
+  color: var(--anc-clr) !important;
+}
+
+i {
+  color: var(--anc-clr);
+}
+
+option {
+  background: var(--primery-clr);
+}
+
+button {
+  background: var(--anc-clr) !important;
+  transition: all 0.1s ease-in-out;
+  width: fit-content;
+  font-weight: 600;
+  margin: auto;
+  font-size: 90%;
+  padding: 0.7rem 5.5rem;
+}
+
+button,
+button i {
+  color: var(--primery-clr) !important;
+}
+
+button:hover {
+  color: var(--anc-clr) !important;
+  background: var(--primery-clr) !important;
+  outline: 1px solid var(--anc-clr);
+}
+
+button:hover i {
+  color: var(--anc-clr) !important;
+}
+
+/* Root for Dark theme */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primery-clr: #192638;
+    --sec-clr: #19283c;
+    --anc-clr: #dde6ed;
+  }
+
+  body {
+    color: rgb(var(--anc-clr));
+    background: var(--primery-clr);
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  input,
+  select,
+  button {
+    color: var(--anc-clr) !important;
+  }
+
+  i {
+    color: var(--anc-clr);
+  }
+
+  option {
+    background: var(--primery-clr);
+  }
+
+  button {
+    background: var(--anc-clr) !important;
+    transition: all 0.1s ease-in-out;
+    width: fit-content;
+    font-weight: 600;
+    margin: auto;
+    font-size: 90%;
+    padding: 0.7rem 5.5rem;
+  }
+
+  button,
+  button i {
+    color: var(--primery-clr) !important;
+  }
+
+  button:hover {
+    color: var(--anc-clr) !important;
+    background: var(--primery-clr) !important;
+    outline: 1px solid var(--anc-clr);
+  }
+
+  button:hover i {
+    color: var(--anc-clr) !important;
+  }
+}
+
+/* Default removes */
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+::placeholder {
+  font-size: 80%;
 }
