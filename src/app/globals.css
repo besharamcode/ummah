@@ -4,132 +4,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
-:root {
-  --primery-clr: #dde6ed;
-  --sec-clr: #19283c;
-  --anc-clr: #192638;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primery-clr: #192638;
-    --sec-clr: #19283c;
-    --anc-clr: #dde6ed;
-  }
-
-  i {
-    color: var(--anc-clr);
-  }
-
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  input,
-  select,
-  button {
-    color: var(--anc-clr);
-    letter-spacing: 0.03ch;
-  }
-
-  option {
-    background: var(--primery-clr);
-  }
-
-  button {
-    transition: all 0.1s ease-in-out;
-    width: fit-content;
-    font-weight: 600;
-    margin: auto;
-    font-size: 90%;
-    padding: 0.7rem 5.5rem;
-  }
-
-  button {
-    background: var(--anc-clr) !important;
-  }
-
-  button i {
-    padding: 2px;
-  }
-
-  button:hover i {
-    color: var(--anc-clr) !important;
-  }
-
-  button:hover {
-    color: var(--anc-clr) !important;
-    background: var(--primery-clr) !important;
-    outline: 1px solid var(--anc-clr);
-  }
-
-  a {
-    color: var(--anc-clr);
-  }
-}
-
-input,
-select {
-  font-size: 85%;
-}
-
-i {
-  color: var(--anc-clr);
-}
-
-option {
-  background: var(--primery-clr);
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-input,
-select,
-button {
-  color: var(--anc-clr) !important;
-}
-
-button {
-  color: var(--primery-clr) !important;
-  transition: all 0.1s ease-in-out;
-  width: fit-content;
-  margin: auto;
-  font-weight: 600;
-  font-size: 90%;
-  padding: 0.7rem 5.5rem;
-}
-
-button,
-button i {
-  color: var(--anc-clr);
-}
-
-button:hover button i {
-  color: var(--anc-clr) !important;
-}
-
-button {
-  background: var(--anc-clr) !important;
-}
-
-button:hover {
-  color: var(--anc-clr) !important;
-  background: var(--primery-clr) !important;
-  outline: 1px solid var(--anc-clr);
-}
-
-::placeholder {
-  font-size: 80%;
-} */
 
 /* Root for light theme */
 
@@ -188,6 +62,10 @@ button:hover {
 
 button:hover i {
   color: var(--anc-clr) !important;
+}
+
+a {
+  color: var(--anc-clr);
 }
 
 /* Root for Dark theme */
@@ -249,6 +127,10 @@ button:hover i {
   button:hover i {
     color: var(--anc-clr) !important;
   }
+
+  a {
+    color: var(--anc-clr);
+  }
 }
 
 /* Default removes */
@@ -261,4 +143,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 ::placeholder {
   font-size: 80%;
+}
+
+input,
+select {
+  font-size: 85%;
 }
