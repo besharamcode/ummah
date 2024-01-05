@@ -1,10 +1,14 @@
 import { userModel } from "@/models/users";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { getCookies } from "cookies-next";
 
-export const POST = async (req) => {
+// export const GET = async (req) => {
+  export const POST = async (req) => {
   try {
     const jwtToken = req.nextUrl.searchParams.get("jwt");
+    const cookieStore = cookies();
     if (!jwtToken) {
       return NextResponse.json(
         {
@@ -23,9 +27,10 @@ export const POST = async (req) => {
         const verifiedUser = await userModel.findByIdAndUpdate(verifyuser._id, {
           $set: { isVerified: true },
         });
+        cookieStore.set("UV_Token", jwtToken);
         return NextResponse.json({
           isAuth: true,
-          redirect: `/in/auth/${verifiedUser.username}/details`,
+          path: `/in/auth/details/${verifiedUser.username}`,
         });
       }
     }

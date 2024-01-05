@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getCookies } from "cookies-next";
+import { setCookie } from "cookies-next";
 
-export default function Userdetails({ params }) {
+export default function Userverified() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const jwt = searchParams.get("jwt");
@@ -24,7 +23,7 @@ export default function Userdetails({ params }) {
     });
     const response = await isAuth.json();
     if (response.isAuth) {
-      router.push(response.redirect);
+      router.push(response.path);
     } else {
       console.log(response.error);
       setisAuth({ isAuth: false, error: response.error });
@@ -32,6 +31,7 @@ export default function Userdetails({ params }) {
   };
 
   useEffect(() => {
+    console.log(jwt);
     if (jwt !== null) {
       isAuthenticate(jwt);
     } else {

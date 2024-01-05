@@ -7,15 +7,10 @@
 
 /* Root for light theme */
 
-:root {
-  --primery-clr: #dde6ed;
+/* :root {
+  --primery-clr: #d6e8f5;
   --sec-clr: #19283c;
   --anc-clr: #192638;
-}
-
-body {
-  color: rgb(var(--anc-clr));
-  background: var(--primery-clr);
 }
 
 p,
@@ -68,18 +63,17 @@ a {
   color: var(--anc-clr);
 }
 
-/* Root for Dark theme */
+::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+} */
 
+/* Root for Dark theme */
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --primery-clr: #192638;
     --sec-clr: #19283c;
     --anc-clr: #dde6ed;
-  }
-
-  body {
-    color: rgb(var(--anc-clr));
-    background: var(--primery-clr);
   }
 
   p,
@@ -109,7 +103,6 @@ a {
     width: fit-content;
     font-weight: 600;
     margin: auto;
-    font-size: 90%;
     padding: 0.7rem 5.5rem;
   }
 
@@ -131,10 +124,14 @@ a {
   a {
     color: var(--anc-clr);
   }
-}
+
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+  }
+} */
 
 /* Default removes */
-
+/* 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -145,7 +142,9 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 80%;
 }
 
+*/
+
 input,
 select {
   font-size: 85%;
-}
+} 

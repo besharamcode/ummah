@@ -1,18 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import transLogo from "@/assets/Ummah-white-trans-logo.svg";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import check from "@/assets/check-svg.svg";
-import cross from "@/assets/cross-svg.svg";
-import { getCookies } from "cookies-next";
 
 export default function Verifyuseremail() {
-  const router = useRouter();
   const params = useParams();
-
   const { email } = params;
 
   return (

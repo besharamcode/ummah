@@ -12,8 +12,6 @@ connect();
 export const GET = async () => {
   try {
     const findUsername = await userModel.find();
-
-    console.log(findUsername);
     return NextResponse.json({ Name: "Ummah" });
   } catch (error) {
     console.log(error);
@@ -206,11 +204,11 @@ const sendOtp = (email, username, token) => {
                                 <tr>
                                   <td class="pad">
                                     <div class="alignment" align="center"><!--[if mso]>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:3000/in/auth/${username}?jwt=${token}" style="height:42px;width:164px;v-text-anchor:middle;" arcsize="10%" stroke="false">
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:3000/in/auth/verifyuser/verified/${username}?jwt=${token}" style="height:42px;width:164px;v-text-anchor:middle;" arcsize="10%" stroke="false">
     <w:anchorlock/>
     <v:textbox inset="0px,0px,0px,0px">
     <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px">
-    <![endif]--><a href="http://localhost:3000/in/auth/${username}?jwt=${token}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#0c1c31;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Bismillah</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+    <![endif]--><a href="http://localhost:3000/in/auth/verifyuser/verified/${username}?jwt=${token}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#0c1c31;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Bismillah</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
                                   </td>
                                 </tr>
                               </table>
@@ -271,36 +269,38 @@ export const POST = async (req) => {
     const request = await req.json();
     const res = NextResponse;
     if (request) {
-      const { name, username, emailormobile, password } = request;
+      const { form } = request;
+      const { name, username, email, password } = form;
 
       const regexForUsername = /^[a-z0-9_\.]+$/;
       const regexForEmail =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      const isEmailValid = regexForEmail.test(emailormobile);
+      const isEmailValid = regexForEmail.test(email);
       const isValidUsername = regexForUsername.test(username);
       if (!isEmailValid || !isValidUsername) {
         return NextResponse.json({ error: "Please enter valid details" });
       }
       const findUserName = await userModel.findOne({ username });
-      const findUserEmail = await userModel.findOne({ email: emailormobile });
+      const findUserEmail = await userModel.findOne({ email: email });
       if (!findUserName && !findUserEmail) {
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
         const user = await userModel.create({
           name,
           username,
-          email: emailormobile,
+          email: email,
           password: hashedPassword,
         });
-        const otp = generateOTP();
         const payload = {
           userid: user._id,
         };
         const token = jwt.sign(payload, process.env.JWT_UV_KEY);
         sendOtp(user.email, username, token);
-        return res.json({ message: "User Created" });
-        // return res;
+        return res.json({
+          message: "User Created",
+          path: `/in/auth/verifyuser/${user.email}`,
+        });
       } else {
         return NextResponse.json({ message: "User aleardy exist" });
       }
@@ -310,36 +310,5 @@ export const POST = async (req) => {
   } catch (error) {
     console.log(error);
     return NextResponse.json({ error: "internal server error" });
-  }
-};
-
-export const PUT = async (req) => {
-  try {
-    const findUser = await userModel.findById(req.user);
-    if (findUser) {
-      const otp = generateOTP();
-      const createOTP = await OTPModel.create({
-        userid: req.user,
-        OTP: otp,
-      });
-      const sendOTP = sendOtp(findUser.email, otp);
-      NextResponse.cookies.set();
-      return NextResponse.json({ Name: "Ummah" });
-    } else {
-      return NextResponse.json({ error: "User not found" });
-    }
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "internal server error" });
-  }
-};
-
-export const DELETE = async (req) => {
-  try {
-    console.log(req);
-    return NextResponse.json({ Name: "Ummah" });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error });
   }
 };
