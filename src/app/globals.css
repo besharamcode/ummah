@@ -1,150 +1,83 @@
-@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400;600;700&display=swap");
-@import url("@/assets/icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+@import url('../assets/icons/icons.css');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Root for light theme */
-
-/* :root {
-  --primery-clr: #d6e8f5;
-  --sec-clr: #19283c;
-  --anc-clr: #192638;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-input,
-select,
-button {
-  color: var(--anc-clr) !important;
-}
-
-i {
-  color: var(--anc-clr);
-}
-
-option {
-  background: var(--primery-clr);
-}
-
-button {
-  background: var(--anc-clr) !important;
-  transition: all 0.1s ease-in-out;
-  width: fit-content;
-  font-weight: 600;
-  margin: auto;
-  font-size: 90%;
-  padding: 0.7rem 5.5rem;
-}
-
-button,
-button i {
-  color: var(--primery-clr) !important;
-}
-
-button:hover {
-  color: var(--anc-clr) !important;
-  background: var(--primery-clr) !important;
-  outline: 1px solid var(--anc-clr);
-}
-
-button:hover i {
-  color: var(--anc-clr) !important;
-}
-
-a {
-  color: var(--anc-clr);
-}
-
-::-webkit-calendar-picker-indicator {
-  filter: invert(0.5);
-} */
-
-/* Root for Dark theme */
-/* 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --primery-clr: #192638;
-    --sec-clr: #19283c;
-    --anc-clr: #dde6ed;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.5rem;
+    
+    --logocolor: #18181b;
   }
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  input,
-  select,
-  button {
-    color: var(--anc-clr) !important;
-  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-  i {
-    color: var(--anc-clr);
-  }
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-  option {
-    background: var(--primery-clr);
-  }
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-  button {
-    background: var(--anc-clr) !important;
-    transition: all 0.1s ease-in-out;
-    width: fit-content;
-    font-weight: 600;
-    margin: auto;
-    padding: 0.7rem 5.5rem;
-  }
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
 
-  button,
-  button i {
-    color: var(--primery-clr) !important;
-  }
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-  button:hover {
-    color: var(--anc-clr) !important;
-    background: var(--primery-clr) !important;
-    outline: 1px solid var(--anc-clr);
-  }
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-  button:hover i {
-    color: var(--anc-clr) !important;
-  }
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
-  a {
-    color: var(--anc-clr);
-  }
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
 
-  ::-webkit-calendar-picker-indicator {
-    filter: invert(0.5);
-  }
-} */
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
 
-/* Default removes */
-/* 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    --logocolor: #fafafa;
+  }
 }
 
-::placeholder {
-  font-size: 80%;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
-
-*/
-
-input,
-select {
-  font-size: 85%;
-} 

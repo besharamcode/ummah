@@ -1,79 +1,81 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
-  darkMode: "class",
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       fontFamily: {
-        signika: ["Signika", "cursive"],
-        Rampart: ["Rampart One", "cursive"],
+        caveat: "'Caveat', cursive;",
       },
-      spacing: {
-        0.5: "2px",
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        logocolor: "var(--logocolor)",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
-      backgroundImage: {},
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
   },
-  daisyui: {
-    themes: [
-      {
-        light: {
-          primary: "#192638",
-          secondary: "#c8e0f5",
-          accent: "#192638",
-          neutral: "#1b1b1b",
-          "base-100": "#d6e8f5",
-          info: "#8bab00",
-          success: "#8bab00",
-          warning: "#bf2c00",
-          error: "#d71130",
-
-          "--rounded-box": "1rem",
-          "--rounded-btn": ".5rem",
-          "--rounded-badge": "1.9rem",
-
-          "--animation-btn": ".25s",
-          "--animation-input": ".2s",
-
-          "--btn-text-case": "uppercase",
-          "--navbar-padding": ".5rem",
-          "--border-btn": "1px",
-        },
-      },
-      {
-        dark: {
-          primary: "#d6e8f5",
-          secondary: "#c8e0f5",
-          accent: "#192638",
-          neutral: "#1b1b1b",
-          "base-100": "#192638",
-          info: "#8bab00",
-          success: "#8bab00",
-          warning: "#bf2c00",
-          error: "#d71130",
-
-          "--rounded-box": "1rem",
-          "--rounded-btn": ".5rem",
-          "--rounded-badge": "1.9rem",
-
-          "--animation-btn": ".25s",
-          "--animation-input": ".2s",
-
-          "--btn-text-case": "uppercase",
-          "--navbar-padding": ".5rem",
-          "--border-btn": "1px",
-        },
-      },
-    ],
-  },
-  plugins: [require("daisyui")],
+  plugins: [require("tailwindcss-animate")],
 };

@@ -1,5 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/components/Themeprovider";
+import { ModeToggle } from "@/components/Themebutton";
+import { Provider } from "react-redux";
+import { store } from "@/Store/store";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,11 +15,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-base-100 text-primary`}>
-        
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      {/* <Provider> */}
+      <body className={`${inter.className}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
+      {/* </Provider> */}
     </html>
   );
 }

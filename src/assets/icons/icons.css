@@ -1,3 +1,91 @@
+:host,
+:root {
+  --fa-style-family-brands: "Font Awesome 6 Brands";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+}
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(./webfonts/fa-brands-400.woff2) format("woff2"),
+    url(./webfonts/fa-brands-400.ttf) format("truetype");
+}
+
+:host,
+:root{
+  --fa-style-family-sharp:"Font Awesome 6 Sharp";
+  --fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp"
+}
+  @font-face{
+    font-family:"Font Awesome 6 Sharp";
+    font-style:normal;
+    font-weight:100;
+    font-display:block;
+    src:url(./webfonts/fa-sharp-thin-100.woff2) format("woff2")
+  }
+  .fa-thin,
+  .fast{
+    font-weight:100
+  }
+
+  :host,
+  :root{
+    --fa-style-family-sharp:"Font Awesome 6 Sharp";
+    --fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp"
+  }
+  @font-face{
+    font-family:"Font Awesome 6 Sharp";
+    font-style:normal;
+    font-weight:900;
+    font-display:block;
+    src:url(./webfonts/fa-sharp-solid-900.woff2) format("woff2")
+  }
+  .fa-solid,
+  .fass{
+    font-weight:900
+  }
+
+  :host,
+  :root{
+    --fa-style-family-sharp:"Font Awesome 6 Sharp";
+    --fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp"
+  }
+  @font-face{
+    font-family:"Font Awesome 6 Sharp";
+    font-style:normal;
+    font-weight:400;
+    font-display:block;
+    src:url(./webfonts/fa-sharp-regular-400.woff2) format("woff2")
+  }
+
+  :host,
+  :root{
+    --fa-style-family-sharp:"Font Awesome 6 Sharp";
+    --fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp"
+  }
+  @font-face{
+    font-family:"Font Awesome 6 Sharp";
+    font-style:normal;
+    font-weight:300;
+    font-display:block;
+    src:url(./webfonts/fa-sharp-light-300.woff2) format("woff2"),
+  }
+  .fa-light,
+  .fasl{
+    font-weight:300
+  }
+
+  .fa-regular,
+  .fasr{
+    font-weight:400
+  }
+
+.fa-brands,
+.fab {
+  font-weight: 400;
+}
+
 .fa-thin,
 .fast {
   font-weight: 100;
@@ -931,6 +1019,11 @@
 .fa-sign-out-alt:before {
   content: "\f2f5";
 }
+
+.fa-right-from-bracke-pro{
+  content: "\f2f5";
+}
+
 .fa-face-glasses:before {
   content: "\e377";
 }
@@ -10057,6 +10150,9 @@
 .fa-hand-peace:before {
   content: "\f25b";
 }
+.fa-face-hand-peeking:before {
+  content: "\e481";
+}
 .fa-circle-trash:before,
 .fa-trash-circle:before {
   content: "\e126";
@@ -11538,23 +11634,7 @@
   white-space: nowrap;
   border-width: 0;
 }
-:host,
-:root {
-  --fa-style-family-brands: "Font Awesome 6 Brands";
-  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
-}
-@font-face {
-  font-family: "Font Awesome 6 Brands";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url(./webfonts/fa-brands-400.woff2) format("woff2"),
-    url(./webfonts/fa-brands-400.ttf) format("truetype");
-}
-.fa-brands,
-.fab {
-  font-weight: 400;
-}
+
 .fa-monero:before {
   content: "\f3d0";
 }

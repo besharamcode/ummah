@@ -1,6 +1,4 @@
 import { Inter } from "next/font/google";
-import transLogo from "@/assets/Ummah-white-trans-logo.svg";
-import home from "@/assets/check-svg.svg";
 import "../../globals.css";
 import Image from "next/image";
 import Link from "next/link";

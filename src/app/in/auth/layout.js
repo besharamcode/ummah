@@ -1,8 +1,9 @@
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
+import Logo from "@/components/Logo";
+import { h1 } from "@/constants/data";
 import Link from "next/link";
-import Image from "next/image";
-import transLogo from "@/assets/Ummah-white-trans-logo.svg";
+import { ModeToggle } from "@/components/Themebutton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,39 +15,40 @@ export const metadata = {
 
 export default function AuthLayout({ children }) {
   return (
-    <body className={inter.className}>
-      <main className="grid place-items-center h-screen">
-        <div className="block max-w-sm border p-6 bg-conatiner rounded-lg shadow border-gray-700 relative">
-          <div className="grid place-items-center mb-2">
-            <Image
-              className=" absolute left-6 top-4"
-              src={transLogo}
-              width={70}
-              height={"auto"}
-              alt="Ummah"
-            ></Image>
+    <main>
+      <ModeToggle />
+      <div className="grid place-items-center min-h-screen mx-4">
+        <div className="border shadow-lg pb-12 lg:w-1/3 md:w-2/3 sm:w-2/3">
+          <span className="font-caveat absolute top-[7vw] left-[5vw] select-none text-5xl blur-2xl h-10 w-10 bg-foreground rounded-full"></span>
+          <span className="font-caveat absolute bottom-[7vw] right-[5vw] select-none text-5xl blur-2xl h-10 w-10 bg-foreground rounded-full"></span>
+          <div className="sm:px-12 px-8 pt-12 pb-5 lg:px-6">
+            <div className="grid place-content-center mb-3">
+              <Logo width={130} />
+            </div>
+            <h1 className="text-center my-2 capitalize font-bold text-lg w-5/6 mx-auto font-caveat">
+              {h1.signup.eng}
+            </h1>
+            {children}
           </div>
-          <h1 className="text-l text-center font-bold font-signika my-2 m-auto mt-11 pt-5">
-            Welcome in Ummah <br /> of Prophet <br />
-            Muhammad Sallallahu Alaihi Wasallam
-          </h1>
-          {children}
-          <div className="text-center mt-8 text-xs">
+          <div className="flex flex-wrap justify-center items-center">
             <Link
-              className="text-gray-500 mx-2 font-light"
-              href={"/in/terms-of-uses"}
+              className=" text-[11px] text-muted-foreground text-center"
+              href="/in/legal/privacypolicy"
             >
-              Terms of Use
+              Privacy Policy
             </Link>{" "}
+            <span className="mx-2 text-[11px] text-muted-foreground text-center">
+              |
+            </span>
             <Link
-              className="text-gray-500 mx-2 font-light"
-              href={"/in/privacy-policy"}
+              className="text-[11px] text-muted-foreground text-center"
+              href="/in/legal/privacypolicy"
             >
-              Privacy policy
+              Terms of Uses
             </Link>
           </div>
         </div>
-      </main>
-    </body>
+      </div>
+    </main>
   );
 }
