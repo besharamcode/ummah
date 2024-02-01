@@ -17,12 +17,12 @@ export default function UserLayout({ children }) {
       <body className={`${inter.className} flex`}>
         <header className="bg-conatiner h-screen w-fit pl-6 pr-20 py-4">
           <div className="mb-12 mt-2">
-            <Image
-              src={transLogo}
+            {/* <Image
+              src={""}
               alt="Ummah"
               height={"auto"}
               width={100}
-            ></Image>
+            ></Image> */}
           </div>
 
           <nav>
