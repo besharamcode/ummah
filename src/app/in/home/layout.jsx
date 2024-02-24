@@ -3,6 +3,7 @@ import Mobileheader from "@/components/Mobileheader";
 import Mobilenav from "@/components/Mobilenav";
 import Sidebar from "@/components/Sidebar";
 import { Inter } from "next/font/google";
+import "@/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

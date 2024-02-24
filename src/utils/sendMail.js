@@ -1,27 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { connect } from "@/helper/db";
-import { userModel } from "@/models/users";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-import { OTPModel } from "@/models/verifyuser";
 
-connect();
-
-export const GET = async () => {
-  try {
-    const findUsername = await userModel.find();
-    return NextResponse.json({ Name: "Ummah" });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error });
-  }
-};
-
-//  Sending email function
-
-const sendOtp = (email, username, token) => {
+export const sendSignUpOTP = async (email, username, token) => {
   // Create a transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     host: "smtp.elasticemail.com",
@@ -251,64 +230,4 @@ const sendOtp = (email, username, token) => {
       console.log("Email sent:", info.response);
     }
   });
-};
-
-// Generate 6-digit otp function
-
-function generateOTP() {
-  const otpLength = 6;
-  let otp = "";
-  for (let i = 0; i < otpLength; i++) {
-    otp += Math.floor(Math.random() * 10);
-  }
-  return otp;
-}
-
-export const POST = async (req) => {
-  try {
-    const request = await req.json();
-    const res = NextResponse;
-    if (request) {
-      const { form } = request;
-      const { name, username, email, password } = form;
-
-      const regexForUsername = /^[a-z0-9_\.]+$/;
-      const regexForEmail =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-      const isEmailValid = regexForEmail.test(email);
-      const isValidUsername = regexForUsername.test(username);
-      if (!isEmailValid || !isValidUsername) {
-        return NextResponse.json({ error: "Please enter valid details" });
-      }
-      const findUserName = await userModel.findOne({ username });
-      const findUserEmail = await userModel.findOne({ email: email });
-      if (!findUserName && !findUserEmail) {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
-        const user = await userModel.create({
-          name,
-          username,
-          email: email,
-          password: hashedPassword,
-        });
-        const payload = {
-          userid: user._id,
-        };
-        const token = jwt.sign(payload, process.env.JWT_UV_KEY);
-        sendOtp(user.email, username, token);
-        return res.json({
-          message: "User Created",
-          path: `/in/auth/verifyuser/${user.email}`,
-        });
-      } else {
-        return NextResponse.json({ message: "User aleardy exist" });
-      }
-    } else {
-      return NextResponse.json({ error: "Data not found" });
-    }
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "internal server error" });
-  }
 };

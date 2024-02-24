@@ -1,12 +1,12 @@
 import Link from "next/link";
 import img1 from "../assets/Ummah-white-logo.svg";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 
 const Mobilenav = () => {
   return (
     <div className="md:hidden fixed bottom-0 border-t w-full">
       <nav>
-        <ul className="flex justify-evenly text-lg">
+        <ul className="flex justify-evenly text-2xl items-center">
           <li>
             <Link href="/" className="p-3 inline-block">
               <i className="fa-solid fa-house"></i>
@@ -30,11 +30,16 @@ const Mobilenav = () => {
             </Link>
           </li>
           <li>
-            <Link href="/" className="p-3 inline-block">
-              <Avatar className="w-6 h-6">
-                <AvatarImage src={img1} alt="Profile" />
-                <AvatarFallback>PF</AvatarFallback>
-              </Avatar>
+            <Link href="/" className="p-3 grid place-items-center">
+              <span className="">
+                <Image
+                  src={img1}
+                  height={"auto"}
+                  width={26}
+                  alt="Profile"
+                  className="rounded-full"
+                ></Image>
+              </span>
             </Link>
           </li>
         </ul>

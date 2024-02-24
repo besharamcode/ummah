@@ -14,8 +14,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import Logo from "@/components/Logo";
 
 const formSchema = z.object({
   password: z.string().min(8, {

@@ -2,7 +2,8 @@ import mongoose, { Schema, model } from "mongoose";
 
 const verifyUserSchema = new Schema({
   userid: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
     index: true,
   },
@@ -17,5 +18,5 @@ const verifyUserSchema = new Schema({
   },
 });
 
-export const OTPModel =
+export const OTP =
   mongoose.models.OTP || mongoose.model("OTP", verifyUserSchema);
